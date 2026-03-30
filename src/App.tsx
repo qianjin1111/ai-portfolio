@@ -69,7 +69,7 @@ const Footer = () => (
 
 function App() {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <div className="min-h-screen bg-dark flex flex-col">
         <Navigation />
         <main className="flex-1 pt-16">
