@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Home, FolderOpen, BookOpen, User, Mail } from 'lucide-react';
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
