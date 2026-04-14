@@ -18,7 +18,7 @@ const projects: Project[] = [
     title: '智能 RAG 知识库问答系统',
     description: '企业级检索增强生成系统，支持多模态文档解析、向量检索、重排序和智能问答。基于 LangChain + ChromaDB + OpenAI 构建，优化后检索准确率达 85%。',
     tech: ['Python', 'ChromaDB', 'OpenAI', 'Docker', 'FastAPI', 'LangChain'],
-    github: 'https://github.com/qianjin1111/ai-portfolio',
+    github: 'https://github.com/qianjin1111/smart-rag-qa-system',
     stars: 256,
     forks: 48,
   },
