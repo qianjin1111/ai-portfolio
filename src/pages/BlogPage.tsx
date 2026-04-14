@@ -1,84 +1,11 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, Tag, ChevronRight, Search } from 'lucide-react';
-
-interface BlogPost {
-  id: number;
-  title: string;
-  excerpt: string;
-  content: string;
-  date: string;
-  readTime: string;
-  category: string;
-  tags: string[];
-}
-
-const blogPosts: BlogPost[] = [
-  {
-    id: 1,
-    title: '构建多Agent协作系统：从理论到实践',
-    excerpt: '深入探讨如何使用LangGraph构建复杂的多Agent系统，实现任务分解、协作执行和结果汇总。',
-    content: '',
-    date: '2025-03-28',
-    readTime: '15 min',
-    category: 'AI Agent',
-    tags: ['LangGraph', 'Multi-Agent', 'Python'],
-  },
-  {
-    id: 2,
-    title: 'RAG系统优化指南：提升检索质量的10个技巧',
-    excerpt: '分享在实际项目中总结的RAG系统优化经验，包括文档切分、嵌入模型选择、重排序策略等。',
-    content: '',
-    date: '2025-03-20',
-    readTime: '12 min',
-    category: 'RAG',
-    tags: ['RAG', 'Vector DB', 'Optimization'],
-  },
-  {
-    id: 3,
-    title: 'Prompt Engineering进阶：让LLM更听话',
-    excerpt: '从基础到高级的Prompt技巧，包括Few-shot、CoT、ReAct等模式的应用实例。',
-    content: '',
-    date: '2025-03-15',
-    readTime: '10 min',
-    category: 'Prompt',
-    tags: ['Prompt', 'LLM', 'Best Practices'],
-  },
-  {
-    id: 4,
-    title: 'AI应用性能监控：从日志到可观测性',
-    excerpt: '如何构建完整的AI应用监控体系，追踪Token消耗、响应延迟、错误率等关键指标。',
-    content: '',
-    date: '2025-03-10',
-    readTime: '8 min',
-    category: '工程实践',
-    tags: ['Monitoring', 'Observability', 'DevOps'],
-  },
-  {
-    id: 5,
-    title: 'CrewAI实战：自动化内容生产工作流',
-    excerpt: '使用CrewAI构建一个完整的内容生产团队，包括研究员、写手、编辑等角色。',
-    content: '',
-    date: '2025-03-05',
-    readTime: '18 min',
-    category: 'AI Agent',
-    tags: ['CrewAI', 'Automation', 'Content'],
-  },
-  {
-    id: 6,
-    title: '向量数据库选型：ChromaDB vs Pinecone vs Weaviate',
-    excerpt: '对比主流向量数据库的优缺点，帮助你选择适合自己项目的向量存储方案。',
-    content: '',
-    date: '2025-02-28',
-    readTime: '14 min',
-    category: '技术对比',
-    tags: ['Vector DB', 'ChromaDB', 'Pinecone'],
-  },
-];
+import { blogPosts, BlogPost } from '../data/posts';
 
 const categories = ['全部', 'AI Agent', 'RAG', 'Prompt', '工程实践', '技术对比'];
 
-const BlogCard = ({ post }: { post: BlogPost }) => (
-  <article className="card-hover bg-card border border-border rounded-xl overflow-hidden cursor-pointer">
+const BlogCard = ({ post, onClick }: { post: BlogPost; onClick: (post: BlogPost) => void }) => (
+  <article className="card-hover bg-card border border-border rounded-xl overflow-hidden cursor-pointer" onClick={() => onClick(post)}>
     <div className="p-6">
       <div className="flex items-center space-x-4 text-sm text-gray-400 mb-3">
         <span className="px-3 py-1 bg-primary/10 border border-primary/30 rounded-full text-primary">
@@ -118,6 +45,7 @@ const BlogCard = ({ post }: { post: BlogPost }) => (
 const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('全部');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
   const filteredPosts = blogPosts.filter((post) => {
     const matchesCategory = selectedCategory === '全部' || post.category === selectedCategory;
@@ -172,9 +100,60 @@ const BlogPage = () => {
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPosts.map((post) => (
-            <BlogCard key={post.id} post={post} />
+            <BlogCard key={post.id} post={post} onClick={setSelectedPost} />
           ))}
         </div>
+
+        {/* Article Modal */}
+        {selectedPost && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto" onClick={() => setSelectedPost(null)}>
+            <div className="min-h-screen py-8 px-4 flex items-start justify-center">
+              <article className="bg-card border border-border rounded-xl max-w-4xl w-full my-auto" onClick={(e) => e.stopPropagation()}>
+                <div className="p-8">
+                  {/* Header */}
+                  <div className="mb-8">
+                    <button
+                      onClick={() => setSelectedPost(null)}
+                      className="text-gray-400 hover:text-white mb-6 flex items-center gap-2"
+                    >
+                      ← 返回列表
+                    </button>
+                    <div className="flex items-center space-x-4 text-sm text-gray-400 mb-4">
+                      <span className="px-3 py-1 bg-primary/10 border border-primary/30 rounded-full text-primary">
+                        {selectedPost.category}
+                      </span>
+                      <span className="flex items-center space-x-1">
+                        <Calendar size={14} />
+                        <span>{selectedPost.date}</span>
+                      </span>
+                      <span className="flex items-center space-x-1">
+                        <Clock size={14} />
+                        <span>{selectedPost.readTime}</span>
+                      </span>
+                    </div>
+                    <h1 className="text-3xl font-bold text-white mb-4">{selectedPost.title}</h1>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedPost.tags.map((tag) => (
+                        <span key={tag} className="text-xs text-gray-500 flex items-center space-x-1 px-2 py-1 bg-dark rounded">
+                          <Tag size={12} />
+                          <span>{tag}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="prose prose-invert prose-lg max-w-none">
+                    <div
+                      className="text-gray-300 leading-relaxed whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{ __html: selectedPost.content.replace(/\n/g, '<br/>').replace(/```/g, '') }}
+                    />
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        )}
 
         {/* Empty State */}
         {filteredPosts.length === 0 && (

@@ -15,60 +15,12 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: 'AI Agent 框架',
-    description: '多Agent协作系统，支持任务分解、自主执行和结果汇总。内置多种Agent角色，可扩展自定义Agent行为。',
-    tech: ['LangGraph', 'FastAPI', 'Python', 'React'],
-    github: '#',
-    demo: '#',
-    stars: 128,
-    forks: 32,
-  },
-  {
-    id: 2,
-    title: '智能 RAG 引擎',
-    description: '企业级检索增强生成系统，支持多模态文档解析、向量检索、重排序和智能问答。',
-    tech: ['Python', 'ChromaDB', 'OpenAI', 'Docker'],
-    github: '#',
+    title: '智能 RAG 知识库问答系统',
+    description: '企业级检索增强生成系统，支持多模态文档解析、向量检索、重排序和智能问答。基于 LangChain + ChromaDB + OpenAI 构建，优化后检索准确率达 85%。',
+    tech: ['Python', 'ChromaDB', 'OpenAI', 'Docker', 'FastAPI', 'LangChain'],
+    github: 'https://github.com/qianjin1111/ai-portfolio',
     stars: 256,
     forks: 48,
-  },
-  {
-    id: 3,
-    title: '自动化工作流平台',
-    description: 'AI驱动的业务流程自动化平台，通过自然语言描述即可创建复杂的工作流。',
-    tech: ['CrewAI', 'React', 'TypeScript', 'Node.js'],
-    github: '#',
-    demo: '#',
-    stars: 89,
-    forks: 15,
-  },
-  {
-    id: 4,
-    title: '智能客服系统',
-    description: '基于LLM的客户服务Agent，支持多轮对话、知识库检索、工单自动分类和情感分析。',
-    tech: ['OpenAI', 'TypeScript', 'Redis', 'PostgreSQL'],
-    github: '#',
-    stars: 167,
-    forks: 28,
-  },
-  {
-    id: 5,
-    title: 'Prompt 管理工具',
-    description: 'Prompt版本管理、A/B测试、性能监控一体化平台，帮助团队优化Prompt效果。',
-    tech: ['Vue.js', 'Python', 'MongoDB', 'FastAPI'],
-    github: '#',
-    demo: '#',
-    stars: 234,
-    forks: 56,
-  },
-  {
-    id: 6,
-    title: '代码审查助手',
-    description: 'AI驱动的代码审查工具，自动检测代码问题、生成审查意见和优化建议。',
-    tech: ['Python', 'GitHub API', 'OpenAI', 'Celery'],
-    github: '#',
-    stars: 312,
-    forks: 67,
   },
 ];
 
@@ -135,17 +87,14 @@ const ProjectsPage = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-white mb-4">项目展示</h1>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            探索我的AI项目作品集，涵盖Agent系统、RAG引擎、自动化工具等多个领域。
-            每个项目都是我对AI技术应用的一次实践。
+          <p className="text-gray-400 max-w-3xl mx-auto">
+            智能RAG知识库问答系统 - 企业级检索增强生成方案
           </p>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+        {/* Single Project */}
+        <div className="max-w-4xl mx-auto">
+          <ProjectCard key={projects[0].id} project={projects[0]} />
         </div>
 
         {/* GitHub CTA */}
