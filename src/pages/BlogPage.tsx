@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, Tag, ChevronRight, Search, BookOpen } from 'lucide-react';
+import { Calendar, Clock, Tag, ChevronRight, Search } from 'lucide-react';
 import { blogPosts, BlogPost } from '../data/posts';
-import { Link } from 'react-router-dom';
 
 const categories = ['全部', 'AI Agent', 'RAG', 'Prompt', '工程实践', 'Tech Analysis', '技术对比'];
 console.log('BlogPage categories:', categories);
@@ -98,31 +97,6 @@ const BlogPage = () => {
             ))}
           </div>
         </div>
-
-        {/* Tech Analysis CTA */}
-        {selectedCategory === 'Tech Analysis' && (
-          <div className="mb-8 p-6 bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/30 rounded-xl">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary/20 rounded-lg">
-                  <BookOpen className="text-primary" size={24} />
-                </div>
-                <div>
-                  <h3 className="text-white font-semibold text-lg">GitHub 项目深度学习系列</h3>
-                  <p className="text-gray-400 text-sm">
-                    包含完整的架构图、代码片段、性能分析和改进建议
-                  </p>
-                </div>
-              </div>
-              <Link
-                to="/tech-analysis"
-                className="px-6 py-3 bg-primary text-dark font-semibold rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                查看完整文章
-              </Link>
-            </div>
-          </div>
-        )}
 
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
