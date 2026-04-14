@@ -4,6 +4,7 @@ import { blogPosts, BlogPost } from '../data/posts';
 import { Link } from 'react-router-dom';
 
 const categories = ['全部', 'AI Agent', 'RAG', 'Prompt', '工程实践', 'Tech Analysis', '技术对比'];
+console.log('BlogPage categories:', categories);
 
 const BlogCard = ({ post, onClick }: { post: BlogPost; onClick: (post: BlogPost) => void }) => (
   <article className="card-hover bg-card border border-border rounded-xl overflow-hidden cursor-pointer" onClick={() => onClick(post)}>
