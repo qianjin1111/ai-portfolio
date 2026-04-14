@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -22,6 +22,14 @@ jobs:
 
       - name: Build
         run: npm run build
+        continue-on-error: false
+
+      - name: Check build output
+        run: |
+          echo "Checking if docs directory exists..."
+          ls -la docs/
+          echo "Checking index.html..."
+          cat docs/index.html | head -5
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
