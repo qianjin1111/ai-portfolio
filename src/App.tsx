@@ -4,6 +4,7 @@ import { Home, FolderOpen, BookOpen, User, Mail } from 'lucide-react';
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
 import BlogPage from './pages/BlogPage';
+import TechAnalysisPage from './pages/TechAnalysisPage';
 import AboutPage from './pages/AboutPage';
 
 const Navigation = () => {
@@ -77,6 +78,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/tech-analysis" element={<TechAnalysisPage />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>
         </main>
