@@ -2,6 +2,7 @@
 
 - 在线访问：https://qianjin1111.github.io/ai-portfolio/
 - 仓库地址：https://github.com/qianjin1111/ai-portfolio
+- 最后更新：2026-04-14 16:40
 
 简洁科技风个人作品展示站点，包含「项目展示 / 博客 / 关于我」三个板块，适配 GitHub Pages 静态部署。
 
